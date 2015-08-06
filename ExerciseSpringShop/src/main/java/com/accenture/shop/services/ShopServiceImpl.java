@@ -44,24 +44,33 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	@Override
-	public Basket addProduct(Product product) {
+	public void setBasket(Basket basket) {
+		this.basket = basket;		
+	}
+	
+	@Override
+	public Basket addProduct(int idProduct, List<Product> listProduts) {
 		
 		if (basket == null) {
 			basket = new Basket();
 		}
 		
-		basket.getListProduct().add(product);
+		for (int i=0; i<=listProduts.size(); i++) {
+			if (listProduts.get(i).getId() == idProduct) {
+				basket.getListProduct().add(listProduts.get(i));
+			}
+		}
 		
 		return basket;
 	}
 
 	@Override
-	public Basket removeProduct(Product product) {
+	public Basket removeProduct(int idProduct) {
 		
 		List<Product> listProduct = basket.getListProduct();
 		
 		for (int i=0; i<=listProduct.size(); i++) {
-			if (listProduct.get(i).getId() == product.getId()) {
+			if (listProduct.get(i).getId() == idProduct) {
 				basket.getListProduct().remove(i);
 			}
 		}
