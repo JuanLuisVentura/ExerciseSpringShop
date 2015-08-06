@@ -1,6 +1,5 @@
 package com.accenture.shop.dtos;
 
-import java.util.Comparator;
 
 public class User {
 

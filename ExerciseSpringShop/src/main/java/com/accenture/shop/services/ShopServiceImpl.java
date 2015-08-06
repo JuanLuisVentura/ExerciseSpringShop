@@ -75,10 +75,10 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public Basket viewBasket(User user) {
+	public List<Product> viewBasket(User user) {
 		
 		if (basket.getUser().equals(user)) {
-			return basket;
+			return basket.getListProduct();
 		}
 		
 		return null;

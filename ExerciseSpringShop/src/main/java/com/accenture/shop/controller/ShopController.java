@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.accenture.shop.dtos.Basket;
@@ -26,7 +26,7 @@ import com.accenture.shop.services.ShopService;
  */
 @Controller
 @RequestMapping("shop")
-@SessionAttributes({"basket"})
+@SessionAttributes({"user","basket"})
 public class ShopController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
@@ -37,9 +37,15 @@ public class ShopController {
 	private List<Product> listProducts;
 	
 	@ModelAttribute("basket")
-	public Basket populateModel() {
+	public Basket populateModelBasket() {
 	       
 		return new Basket();
+	}
+	
+	@ModelAttribute("user")
+	public User populateModelUser() {
+	       
+		return new User();
 	}
 	
 	@PostConstruct
@@ -63,7 +69,7 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
-	public String addProduct(Model model, int idProduct, @ModelAttribute("basket")Basket basket) {
+	public @ResponseBody String addProduct(Model model, int idProduct, @ModelAttribute("basket")Basket basket) {
 		
 		shop.setBasket(basket);
 		
@@ -71,11 +77,11 @@ public class ShopController {
 		
 		model.addAttribute("basket", basket);
 		
-		return "home";
+		return "OK";
 	}
 	
 	@RequestMapping(value = "/remove", method = {RequestMethod.GET, RequestMethod.POST})
-	public String removeProduct(Model model, int idProduct, @ModelAttribute("basket")Basket basket) {
+	public @ResponseBody String removeProduct(Model model, int idProduct, @ModelAttribute("basket")Basket basket) {
 		
 		shop.setBasket(basket);
 		
@@ -83,15 +89,17 @@ public class ShopController {
 		
 		model.addAttribute("basket", basket);
 		
-		return "home";
+		return "OK";
 	}
 	
 	@RequestMapping(value = "/view", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewBasket(Model model, User user) {
+	public String viewBasket(Model model, @ModelAttribute("user") User user, @ModelAttribute("basket")Basket basket) {
 		
-		Basket basket = shop.viewBasket(user);
+		shop.setBasket(basket);
 		
-		model.addAttribute("basket", basket);
+		List<Product> listProducts = shop.viewBasket(user);
+		
+		model.addAttribute("listProducts", listProducts);
 		
 		return "home";
 	}
