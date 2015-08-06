@@ -51,7 +51,7 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public Basket addProduct(int idProduct, List<Product> listProduts) {
 		
-		for (int i=0; i<=listProduts.size(); i++) {
+		for (int i=0; i<listProduts.size(); i++) {
 			if (listProduts.get(i).getId() == idProduct) {
 				basket.getListProduct().add(listProduts.get(i));
 			}
@@ -65,7 +65,7 @@ public class ShopServiceImpl implements ShopService {
 		
 		List<Product> listProduct = basket.getListProduct();
 		
-		for (int i=0; i<=listProduct.size(); i++) {
+		for (int i=0; i<listProduct.size(); i++) {
 			if (listProduct.get(i).getId() == idProduct) {
 				basket.getListProduct().remove(i);
 			}
