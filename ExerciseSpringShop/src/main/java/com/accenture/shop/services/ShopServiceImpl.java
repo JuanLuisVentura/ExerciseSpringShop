@@ -58,16 +58,24 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public Basket removeProduct(Product product) {
 		
-		for (iterable_type iterable_element : iterable) {
-			
+		List<Product> listProduct = basket.getListProduct();
+		
+		for (int i=0; i<=listProduct.size(); i++) {
+			if (listProduct.get(i).getId() == product.getId()) {
+				basket.getListProduct().remove(i);
+			}
 		}
 		
-		return null;
+		return basket;
 	}
 
 	@Override
 	public Basket viewBasket(User user) {
-		// TODO Auto-generated method stub
+		
+		if (basket.getUser().equals(user)) {
+			return basket;
+		}
+		
 		return null;
 	}
 
