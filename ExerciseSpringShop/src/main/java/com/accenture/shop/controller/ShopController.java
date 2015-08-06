@@ -2,7 +2,6 @@ package com.accenture.shop.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 
@@ -13,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.accenture.shop.dtos.Basket;
 import com.accenture.shop.dtos.Product;
 import com.accenture.shop.dtos.User;
 import com.accenture.shop.services.ShopService;
@@ -56,17 +55,25 @@ public class ShopController {
 	@RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
 	public String addProduct(Product product) {
 		
+		shop.addProduct(product);
+		
 		return "home";
 	}
 	
 	@RequestMapping(value = "/remove", method = {RequestMethod.GET, RequestMethod.POST})
 	public String removeProduct(Product product) {
 		
+		shop.removeProduct(product);
+		
 		return "home";
 	}
 	
 	@RequestMapping(value = "/view", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewBasket(User user) {
+	public String viewBasket(Model model, User user) {
+		
+		Basket basket = shop.viewBasket(user);
+		
+		model.addAttribute("basket", basket);
 		
 		return "home";
 	}
