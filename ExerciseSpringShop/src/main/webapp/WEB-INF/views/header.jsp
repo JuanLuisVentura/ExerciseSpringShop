@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -101,12 +103,16 @@
 		text-align: center;
 	}
 	 
+	 .myButton {
+	 	margin: 0px 5px ;
+	 }
 	</style>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -116,9 +122,16 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <!--  <li role="presentation" class="active"><a href="home.jsp">Home</a></li>  -->
-            <li role="presentation"><a href="productList.jsp">View products</a></li>
-            <li role="presentation"><a href="viewCart.jsp">View cart</a></li>
-            <li role="presentation"><a href="login.jsp">Login</a></li>
+            <li role="presentation"><a href="/SpringShop/shop/viewProducts">View products</a></li>
+            <li role="presentation"><a href="/SpringShop/shop/viewBasket">View cart</a></li>
+           	<c:choose>
+	            <c:when test="${user.name == null}">
+	            	<li role="presentation"><a href="/SpringShop/user/">Login</a></li>
+	            </c:when>
+	            <c:otherwise>
+	            	<li role="presentation"><a href="/SpringShop/user/logout">${user.name}</a></li>
+	            </c:otherwise>
+            </c:choose>
           </ul>
         </nav>
         <h3 class="text-muted">Exercise Spring Shop</h3>

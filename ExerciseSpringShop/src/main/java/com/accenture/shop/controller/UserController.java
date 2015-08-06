@@ -34,21 +34,27 @@ public class UserController {
 		return new User();
 	}
 	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String index(Model model) {
+		
+		return "login";
+	}
+	
 	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody String login(Model model, User user) {
+	public String login(Model model, User user) {
 		
 		userService.login(user);
 		
 		model.addAttribute("user", user);
 				
-		return "OK";
+		return "index";
 	}
 	
 	@RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logout(Model model) {
 		
-		model.asMap().remove("user");
+		model.addAttribute("user", new User());
 		
-		return "home";
+		return "index";
 	}
 }

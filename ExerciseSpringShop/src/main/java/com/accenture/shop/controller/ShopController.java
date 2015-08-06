@@ -65,7 +65,7 @@ public class ShopController {
 		
 		model.addAttribute("listProducts", listProducts);
 		
-		return "home";
+		return "index";
 	}
 	
 	@RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
@@ -92,7 +92,7 @@ public class ShopController {
 		return "OK";
 	}
 	
-	@RequestMapping(value = "/view", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/viewBasket", method = {RequestMethod.GET, RequestMethod.POST})
 	public String viewBasket(Model model, @ModelAttribute("user") User user, @ModelAttribute("basket")Basket basket) {
 		
 		shop.setBasket(basket);
@@ -101,12 +101,20 @@ public class ShopController {
 		
 		model.addAttribute("listProducts", listProducts);
 		
-		return "home";
+		return "viewCart";
 	}
 	
 	@RequestMapping(value = "/pay", method = {RequestMethod.GET, RequestMethod.POST})
 	public String paymentBasket(User user) {
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = "/viewProducts", method = RequestMethod.GET)
+	public String viewProducts(Model model) {
+		
+		model.addAttribute("listProducts", listProducts);
+		
+		return "productList";
 	}
 }
