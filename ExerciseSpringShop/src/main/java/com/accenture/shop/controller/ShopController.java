@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.accenture.shop.dtos.Basket;
@@ -25,7 +26,7 @@ import com.accenture.shop.services.ShopService;
  */
 @Controller
 @RequestMapping("shop")
-@SessionAttributes("basket")
+@SessionAttributes({"basket"})
 public class ShopController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
@@ -34,6 +35,12 @@ public class ShopController {
 	private ShopService shop;
 	
 	private List<Product> listProducts;
+	
+	@ModelAttribute("basket")
+	public Basket populateModel() {
+	       
+		return new Basket();
+	}
 	
 	@PostConstruct
 	private void init() {

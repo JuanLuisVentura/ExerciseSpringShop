@@ -51,10 +51,6 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public Basket addProduct(int idProduct, List<Product> listProduts) {
 		
-		if (basket == null) {
-			basket = new Basket();
-		}
-		
 		for (int i=0; i<=listProduts.size(); i++) {
 			if (listProduts.get(i).getId() == idProduct) {
 				basket.getListProduct().add(listProduts.get(i));

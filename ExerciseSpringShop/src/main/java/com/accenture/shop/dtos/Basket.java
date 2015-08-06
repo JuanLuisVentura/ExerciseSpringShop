@@ -1,11 +1,17 @@
 package com.accenture.shop.dtos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
 
 	private User user;
 	private List<Product> listProduct;
+	
+	public Basket() {
+		this.user = new User();
+		this.listProduct = new ArrayList<Product>();
+	}
 	
 	public User getUser() {
 		return user;
