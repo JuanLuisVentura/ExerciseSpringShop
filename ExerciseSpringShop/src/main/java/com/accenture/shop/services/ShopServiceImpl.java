@@ -1,7 +1,6 @@
 package com.accenture.shop.services;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,13 +45,23 @@ public class ShopServiceImpl implements ShopService {
 	
 	@Override
 	public Basket addProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if (basket == null) {
+			basket = new Basket();
+		}
+		
+		basket.getListProduct().add(product);
+		
+		return basket;
 	}
 
 	@Override
 	public Basket removeProduct(Product product) {
-		// TODO Auto-generated method stub
+		
+		for (iterable_type iterable_element : iterable) {
+			
+		}
+		
 		return null;
 	}
 
